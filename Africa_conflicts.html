@@ -246,7 +246,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Load the file with the data. This version contains less columns than the original dataset, for I removed unnecesary for this analysis, like coordinates, notes and source.</p>
+<p>Load the file with the data. This version contains less columns than the original dataset, for I removed unnecesary columns for this analysis, like coordinates, notes and source.</p>
 
 </div>
 </div>
@@ -885,7 +885,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Aggregating this dataset by the number of conflicts per year shows a clear change between the years 2010 and 2011. In 2011 the <a href="https://en.wikipedia.org/wiki/Libyan_civil_war_(2011">First Libyan Civil War</a>, leading to a phase of turmoil known as the <a href="https://en.wikipedia.org/wiki/Factional_violence_in_Libya_(2011%E2%80%9314">Post-civil war violence</a> and the still ongoing <a href="https://en.wikipedia.org/wiki/Libyan_civil_war_(2014%E2%80%93present">Second Libyan Civil War</a>. This events increased the number of conflicts dramatically, as can be seen in the plot below.</p>
+<p>Aggregating this dataset by the number of conflicts per year shows a clear change between the years 2010 and 2011. In 2011 the <a href="https://en.wikipedia.org/wiki/Libyan_civil_war_%282011%29">First Libyan Civil War</a>, leading to a phase of turmoil known as the <a href="https://en.wikipedia.org/wiki/Factional_violence_in_Libya_%282011%E2%80%9314%29">Post-civil war violence</a> and the still ongoing <a href="https://en.wikipedia.org/wiki/Libyan_civil_war_%282014%E2%80%93present%29">Second Libyan Civil War</a>. This events increased the number of conflicts dramatically, as can be seen in the plot below.</p>
 
 </div>
 </div>
@@ -919,7 +919,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.text.Text at 0x7faa8c1aa320&gt;</pre>
+<pre>&lt;matplotlib.text.Text at 0x7fca20a652e8&gt;</pre>
 </div>
 
 </div>
@@ -1162,7 +1162,7 @@ SZ2ZmZlZDXBSZ2ZmZlYDnNSZmZmZ1QAndWZmZmY14P8De/jvIWmVQzQAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The next pieces of code is an analysis of the conflicts in 2015. The query aggregates the data per day and counts the number of fatalities. The total of fatalities in 2015 was of 2705, and the most deadly day was January 3, with a death toll of 101 due to 7 conflicts.</p>
+<p>The next pieces of code are an analysis of the conflicts in 2015. The query aggregates the data per day and counts the number of fatalities. The total of fatalities in 2015 was of 2705, and the most deadly day was January 3, with a death toll of 101 due to 7 conflicts.</p>
 
 </div>
 </div>
@@ -1211,7 +1211,7 @@ SZ2ZmZlZDXBSZ2ZmZlYDnNSZmZmZ1QAndWZmZmY14P8De/jvIWmVQzQAAAAASUVORK5CYII=
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Fatalities in 2015: 2705
-Most deadly day:  Row(event_date=&apos;&quot;03/01/2015&quot;&apos;, sum(fatalities_i)=101, count(event_date)=7)
+Most deadly day:  Row(event_date=&apos;&quot;03/01/2015&quot;&apos;, count(event_date)=7, sum(fatalities_i)=101)
 </pre>
 </div>
 </div>
@@ -1245,7 +1245,7 @@ Most deadly day:  Row(event_date=&apos;&quot;03/01/2015&quot;&apos;, sum(fatalit
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.text.Text at 0x7faa8c1672e8&gt;</pre>
+<pre>&lt;matplotlib.text.Text at 0x7fca20a1ccc0&gt;</pre>
 </div>
 
 </div>
