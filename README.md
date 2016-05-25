@@ -32,7 +32,7 @@ sc = pyspark.SparkContext('local[*]')
 sqlCtx = SQLContext(sc)
 ```
 
-Load the file with the data. This version contains less columns than the original dataset, for I removed unnecesary for this analysis, like coordinates, notes and source.
+Load the file with the data. This version contains less columns than the original dataset, for I removed unnecesary columns for this analysis, like coordinates, notes and source.
 
 
 ```python
@@ -459,7 +459,7 @@ libya_df = africa_df.select('*')\
                     .where("country='\"Libya\"'")
 ```
 
-Aggregating this dataset by the number of conflicts per year shows a clear change between the years 2010 and 2011. In 2011 the [First Libyan Civil War](https://en.wikipedia.org/wiki/Libyan_civil_war_(2011), leading to a phase of turmoil known as the [Post-civil war violence](https://en.wikipedia.org/wiki/Factional_violence_in_Libya_(2011%E2%80%9314) and the still ongoing [Second Libyan Civil War](https://en.wikipedia.org/wiki/Libyan_civil_war_(2014%E2%80%93present). This events increased the number of conflicts dramatically, as can be seen in the plot below.
+Aggregating this dataset by the number of conflicts per year shows a clear change between the years 2010 and 2011. In 2011 the [First Libyan Civil War](https://en.wikipedia.org/wiki/Libyan_civil_war_2011), leading to a phase of turmoil known as the [Post-civil war violence](https://en.wikipedia.org/wiki/Factional_violence_in_Libya_%282011%E2%80%9314%29) and the still ongoing [Second Libyan Civil War](https://en.wikipedia.org/wiki/Libyan_civil_war_%282014%E2%80%93present%29). This events increased the number of conflicts dramatically, as can be seen in the plot below.
 
 
 ```python
@@ -478,7 +478,7 @@ ax.set_ylabel('Number of conflicts')
 
 
 
-    <matplotlib.text.Text at 0x7faa8c1aa320>
+    <matplotlib.text.Text at 0x7fca20a652e8>
 
 
 
@@ -486,7 +486,7 @@ ax.set_ylabel('Number of conflicts')
 ![png](output_27_1.png)
 
 
-The next pieces of code is an analysis of the conflicts in 2015. The query aggregates the data per day and counts the number of fatalities. The total of fatalities in 2015 was of 2705, and the most deadly day was January 3, with a death toll of 101 due to 7 conflicts.
+The next pieces of code are an analysis of the conflicts in 2015. The query aggregates the data per day and counts the number of fatalities. The total of fatalities in 2015 was of 2705, and the most deadly day was January 3, with a death toll of 101 due to 7 conflicts.
 
 
 ```python
@@ -511,7 +511,7 @@ print('Most deadly day: ', libya_fatalities_per_day.first())
 ```
 
     Fatalities in 2015: 2705
-    Most deadly day:  Row(event_date='"03/01/2015"', sum(fatalities_i)=101, count(event_date)=7)
+    Most deadly day:  Row(event_date='"03/01/2015"', count(event_date)=7, sum(fatalities_i)=101)
 
 
 
@@ -527,7 +527,7 @@ ax.set_ylabel('Number of fatalities')
 
 
 
-    <matplotlib.text.Text at 0x7faa8c1672e8>
+    <matplotlib.text.Text at 0x7fca20a1ccc0>
 
 
 
