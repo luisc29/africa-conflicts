@@ -459,7 +459,7 @@ libya_df = africa_df.select('*')\
                     .where("country='\"Libya\"'")
 ```
 
-Aggregating this dataset by the number of conflicts per year shows a clear change between the years 2010 and 2011. In 2011 the [First Libyan Civil War](https://en.wikipedia.org/wiki/Libyan_civil_war_2011), leading to a phase of turmoil known as the [Post-civil war violence](https://en.wikipedia.org/wiki/Factional_violence_in_Libya_%282011%E2%80%9314%29) and the still ongoing [Second Libyan Civil War](https://en.wikipedia.org/wiki/Libyan_civil_war_%282014%E2%80%93present%29). This events increased the number of conflicts dramatically, as can be seen in the plot below.
+Aggregating this dataset by the number of conflicts per year shows a clear change between the years 2010 and 2011. In 2011 the _First Libyan Civil War_, leading to a phase of turmoil known as the _Post-civil war violence_ and the still ongoing _Second Libyan Civil War_. This events increased the number of conflicts dramatically, as can be seen in the plot below.
 
 
 ```python
