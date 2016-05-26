@@ -1,6 +1,10 @@
 
 # Analyzing the ACLED data with Spark
 
+*Luis Carlos Cruz*
+
+*May 2016*
+
 ACLED (Armed Conflict Location and Event Data Project) is designed for disaggregated conflict analysis and crisis mapping. This dataset codes the dates and locations of all reported political violence and protest events in over 60 developing countries in Africa and Asia. Political violence and protest includes events that occur within civil wars and periods of instability, public protest and regime breakdown. The project covers all African countries from 1997 to the present, and South and South-East Asia in real-time. For more information visit the [ACLED website](http://www.acleddata.com/).
 
 This work is solely based on the african data, covering a time lapse between the years 1997 and 2015. The purpose of the work is to extract relevant information from the dataset using the basic features of Spark.
@@ -32,7 +36,7 @@ sc = pyspark.SparkContext('local[*]')
 sqlCtx = SQLContext(sc)
 ```
 
-Load the file with the data. This version contains less columns than the original dataset, for I removed unnecesary columns for this analysis, like coordinates, notes and source.
+Load the file with the data. This version contains less columns than the original dataset, for I removed unnecesary for this analysis, like coordinates, notes and source.
 
 
 ```python
@@ -54,7 +58,17 @@ africa = africa_rdd.map(getEvent)
 africa_df = africa.toDF()
 ```
 
-Convert the columns into the proper type and remove NAs. The resulting data frame contains the following attributes:
+Convert the columns into the proper type and remove NAs. 
+
+
+```python
+africa_df = africa_df.select('*', africa_df.fatalities.cast('integer').alias('fatalities_i'), 
+                             africa_df.year.cast('integer').alias('year_i'))
+africa_df = africa_df.dropna()
+africa_df = africa_df.select('*', date_format(africa_df.event_date,'\"%d/%m/%Y\"').alias('date'))
+```
+
+The resulting data frame contains the following attributes:
 - event_date: date of the event with the format dd/mm/yyyy
 - year: the year in which the event took place
 - event_type: a description of the type of the event that could be one of the following values
@@ -74,14 +88,6 @@ Convert the columns into the proper type and remove NAs. The resulting data fram
 - country: the country in which the event took place
 - location: the location in which the event took place
 - fatalities: the numer or estimate of fatalities
-
-
-```python
-africa_df = africa_df.select('*', africa_df.fatalities.cast('integer').alias('fatalities_i'), 
-                             africa_df.year.cast('integer').alias('year_i'))
-africa_df = africa_df.dropna()
-africa_df = africa_df.select('*', date_format(africa_df.event_date,'\"%d/%m/%Y\"').alias('date'))
-```
 
 
 ```python
@@ -459,31 +465,35 @@ libya_df = africa_df.select('*')\
                     .where("country='\"Libya\"'")
 ```
 
-Aggregating this dataset by the number of conflicts per year shows a clear change between the years 2010 and 2011. In 2011 the [First Libyan Civil War](https://en.wikipedia.org/wiki/Libyan_civil_war_2011), leading to a phase of turmoil known as the [Post-civil war violence](https://en.wikipedia.org/wiki/Factional_violence_in_Libya_%282011%E2%80%9314%29) and the still ongoing [Second Libyan Civil War](https://en.wikipedia.org/wiki/Libyan_civil_war_%282014%E2%80%93present%29). This events increased the number of conflicts dramatically, as can be seen in the plot below.
+Aggregating this dataset by the number of conflicts per year shows a clear change between the years 2010 and 2011. In 2011 the [First Libyan Civil War](https://en.wikipedia.org/wiki/Libyan_civil_war_2011) started, leading to a phase of turmoil known as the [Post-civil war violence](https://en.wikipedia.org/wiki/Factional_violence_in_Libya_%282011%E2%80%9314%29) and the still ongoing [Second Libyan Civil War](https://en.wikipedia.org/wiki/Libyan_civil_war_%282014%E2%80%93present%29). This events increased the number of conflicts dramatically, as can be seen in the plot below.
 
 
 ```python
 df = libya_df.groupBy('year')\
                 .agg({'year':'count'})\
                 .toPandas()
-        
-fig = plt.figure(figsize=(10,4))
+labels = [str(i) for i in df['year']]
+x = [float(i) for i in df['year']]
+fig = plt.figure(figsize=(15,4))
 ax = fig.add_subplot(111)
-ax.plot(df['year'],df['count(year)'])
+ax.set_xticks(np.arange(1997,2016))
+ax.set_xticklabels(labels)
+ax.bar(x,df['count(year)'], align='center')
 ax.set_title('Lybian conflicts per year')
 ax.set_xlabel('Year')
 ax.set_ylabel('Number of conflicts')
+
 ```
 
 
 
 
-    <matplotlib.text.Text at 0x7fca20a652e8>
+    <matplotlib.text.Text at 0x7f95a0d91c50>
 
 
 
 
-![png](output_27_1.png)
+![png](output_29_1.png)
 
 
 The next pieces of code are an analysis of the conflicts in 2015. The query aggregates the data per day and counts the number of fatalities. The total of fatalities in 2015 was of 2705, and the most deadly day was January 3, with a death toll of 101 due to 7 conflicts.
@@ -527,10 +537,10 @@ ax.set_ylabel('Number of fatalities')
 
 
 
-    <matplotlib.text.Text at 0x7fca20a1ccc0>
+    <matplotlib.text.Text at 0x7f95a0cb1470>
 
 
 
 
-![png](output_31_1.png)
+![png](output_33_1.png)
 
