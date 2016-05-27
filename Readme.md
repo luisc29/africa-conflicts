@@ -28,6 +28,12 @@ from pyspark.sql.functions import date_format, col, udf, lit, array_contains
 
 ```
 
+    /opt/conda/lib/python3.5/site-packages/matplotlib/font_manager.py:273: UserWarning: Matplotlib is building the font cache using fc-list. This may take a moment.
+      warnings.warn('Matplotlib is building the font cache using fc-list. This may take a moment.')
+    /opt/conda/lib/python3.5/site-packages/matplotlib/font_manager.py:273: UserWarning: Matplotlib is building the font cache using fc-list. This may take a moment.
+      warnings.warn('Matplotlib is building the font cache using fc-list. This may take a moment.')
+
+
 Create the Spark and SQL contexts.
 
 
@@ -494,7 +500,7 @@ ax.set_ylabel('Number of conflicts')
 
 
 
-    <matplotlib.text.Text at 0x7f792b8f3ba8>
+    <matplotlib.text.Text at 0x7f7e7f588320>
 
 
 
@@ -543,7 +549,7 @@ ax.set_ylabel('Number of fatalities')
 
 
 
-    <matplotlib.text.Text at 0x7f79500f4978>
+    <matplotlib.text.Text at 0x7f7e80bd5748>
 
 
 
