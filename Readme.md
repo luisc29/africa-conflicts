@@ -28,12 +28,6 @@ from pyspark.sql.functions import date_format, col, udf, lit, array_contains
 
 ```
 
-    /opt/conda/lib/python3.5/site-packages/matplotlib/font_manager.py:273: UserWarning: Matplotlib is building the font cache using fc-list. This may take a moment.
-      warnings.warn('Matplotlib is building the font cache using fc-list. This may take a moment.')
-    /opt/conda/lib/python3.5/site-packages/matplotlib/font_manager.py:273: UserWarning: Matplotlib is building the font cache using fc-list. This may take a moment.
-      warnings.warn('Matplotlib is building the font cache using fc-list. This may take a moment.')
-
-
 Create the Spark and SQL contexts.
 
 
@@ -42,7 +36,13 @@ sc = pyspark.SparkContext('local[*]')
 sqlCtx = SQLContext(sc)
 ```
 
-Load the file with the data. This version contains less columns than the original dataset, for I removed unnecesary for this analysis, like coordinates, notes and source.
+Download the file with the data and load it into a RDD object. This version contains less columns than the original dataset, for I removed unnecesary columns for this analysis, like coordinates, notes and source.
+
+
+```python
+%%capture
+! wget https://www.dropbox.com/s/w0o54igtxufws0c/africa2.csv
+```
 
 
 ```python
@@ -494,12 +494,12 @@ ax.set_ylabel('Number of conflicts')
 
 
 
-    <matplotlib.text.Text at 0x7f8f916aada0>
+    <matplotlib.text.Text at 0x7f792b8f3ba8>
 
 
 
 
-![png](output_29_1.png)
+![png](output_30_1.png)
 
 
 The next pieces of code are an analysis of the conflicts in 2015. The query aggregates the data per day and counts the number of fatalities. The total of fatalities in 2015 was of 2705, and the most deadly day was January 3, with a death toll of 101 due to 7 conflicts.
@@ -543,12 +543,12 @@ ax.set_ylabel('Number of fatalities')
 
 
 
-    <matplotlib.text.Text at 0x7f8fac3f1da0>
+    <matplotlib.text.Text at 0x7f79500f4978>
 
 
 
 
-![png](output_33_1.png)
+![png](output_34_1.png)
 
 
 
