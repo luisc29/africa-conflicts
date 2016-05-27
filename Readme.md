@@ -24,9 +24,15 @@ from datetime import datetime
 import pyspark
 from pyspark.sql import SQLContext
 from pyspark.sql import Row
-from pyspark.sql.functions import date_format, col, udf, lit
+from pyspark.sql.functions import date_format, col, udf, lit, array_contains
 
 ```
+
+    /opt/conda/lib/python3.5/site-packages/matplotlib/font_manager.py:273: UserWarning: Matplotlib is building the font cache using fc-list. This may take a moment.
+      warnings.warn('Matplotlib is building the font cache using fc-list. This may take a moment.')
+    /opt/conda/lib/python3.5/site-packages/matplotlib/font_manager.py:273: UserWarning: Matplotlib is building the font cache using fc-list. This may take a moment.
+      warnings.warn('Matplotlib is building the font cache using fc-list. This may take a moment.')
+
 
 Create the Spark and SQL contexts.
 
@@ -276,7 +282,7 @@ africa_df.select("country", "event_type", "year")\
 
 
 
-The following query shows the top 10 of actors of factions that take part on conflicts. Armed groups and military forces shows up on the top 10, but also protesters and rioters.
+The following query shows the top 10 of factions that take part in conflicts. Armed groups and military forces shows up in the top 10, but also protesters and rioters.
 
 
 ```python
@@ -357,7 +363,7 @@ africa_df.select('actor1','inter1')\
 
 
 
-Next, I show the top 10 of most conflicting cities according to the number of events registered per location. For that, I create a dataframe with the registry of cities and countries they belong to (first query). The following query gets the locations aggregated by the count of events, resulting in a second dataframe. Finally, I join both datasets by the 'location' column. The result shows the top 10 of conflicting locations with the country.
+Next, I show the top 10 of most conflicting cities according to the number of events registered per location. For that, I create a dataframe with the registry of cities and countries they belong to (first query). The second query gets the locations aggregated by the count of events, resulting in a second dataframe. Finally, I join both datasets by the 'location' column. The result shows the top 10 of conflicting locations with the country.
 
 
 ```python
@@ -488,7 +494,7 @@ ax.set_ylabel('Number of conflicts')
 
 
 
-    <matplotlib.text.Text at 0x7f95a0d91c50>
+    <matplotlib.text.Text at 0x7f8f916aada0>
 
 
 
@@ -537,10 +543,15 @@ ax.set_ylabel('Number of fatalities')
 
 
 
-    <matplotlib.text.Text at 0x7f95a0cb1470>
+    <matplotlib.text.Text at 0x7f8fac3f1da0>
 
 
 
 
 ![png](output_33_1.png)
 
+
+
+```python
+
+```
